@@ -11,8 +11,14 @@
       <input id="username" type="text" name="username" value="">
       <label for="email">Email:</label>
       <input id="email" type="text" name="email" value="">
-      <input type="submit" name="" value="">
+      <input type="submit" name="submit" value="Submit">
     </form>
+
+    {% for user in myUser %}
+      <li>{{ user.id }}. {{ user.username }} - {{ user.email }}</li>
+    {% endfor %}
+
+    {{ oneItem.username }}
 
   </body>
 </html>

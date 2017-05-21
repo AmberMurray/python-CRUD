@@ -1,9 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template
+from flask import request, redirect, url_for, render_template
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/flask_movie'
+app.debug = True
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -20,11 +21,21 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('add_user.html')
+    myUser = User.query.all()
+    oneItem = User.query.filter_by(username="cat").first()
+    return render_template('add_user.html', myUser=myUser, oneItem=oneItem)
+
+@app.route('/profile/<username>')
+def profile(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template('profile.html', user=user)
 
 @app.route('/post_user', methods=['POST'])
 def post_user():
-    return '<h1 style="color: blue">Hello Flask</h1>'
+    user = User(request.form['username'], request.form['email'])
+    db.session.add(user)
+    db.session.commit()
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
