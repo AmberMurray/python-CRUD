@@ -23,7 +23,7 @@ class User(db.Model):
 def index():
     myUser = User.query.all()
     oneItem = User.query.filter_by(username="cat").first()
-    return render_template('add_user.html', myUser=myUser, oneItem=oneItem)
+    return render_template('index.html', myUser=myUser, oneItem=oneItem)
 
 @app.route('/profile/<username>')
 def profile(username):
