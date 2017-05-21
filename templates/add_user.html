@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends 'layout.html' %}
+{% block title %}Add A User{% endblock %}
+
+{% block content%}
+<div class="container">
+  <div class="row well col-md-4 col-md-offset-4">
 
     <form class="" action="/post_user" method="post">
       <label for="username">Username:</label>
@@ -20,5 +19,6 @@
 
     {{ oneItem.username }}
 
-  </body>
-</html>
+    </div>
+  </div>
+{% endblock %}
