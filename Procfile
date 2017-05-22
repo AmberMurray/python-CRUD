@@ -1,1 +1,1 @@
-web: flask python3 app.py --log-file -
+web: gunicorn gettingstarted.wsgi --log-file -
