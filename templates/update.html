@@ -3,7 +3,7 @@
 
 {% block content%}
 <h2 class="text-center">Update {{ user.username }}</h2>
-<form class="well" action="/post_user" method="post">
+<form class="well" action="/update/{{ user.id }}" method="post">
   <label class="col-sm-offset-1" for="username">Username:</label>
   <input id="username" type="text" name="username" value="{{ user.username }}">
   <label class="col-sm-offset-2" for="email">Email:</label>

@@ -12,7 +12,7 @@ app.debug = True
 db = SQLAlchemy(app)
 
 
-class User(db.Model):   
+class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -52,15 +52,14 @@ def edit(id):
     user = User.query.filter_by(id=id).first()
     return render_template('update.html', user=user)
 
-@app.route('/update/<id>', methods=['PUT'])
+@app.route('/update/<id>', methods=['POST'])
 def update(id):
     formInfo = User(request.form['username'], request.form['email'])
     user = User.query.filter_by(id=id).first()
     user.username = formInfo.username
     user.email = formInfo.email
-    db.session.add(user)
     db.session.commit()
-    return redirect(url_for('index.html'))
+    return redirect(url_for('index'))
 
 
 @app.route('/delete/<id>', methods=['POST'])
