@@ -2,19 +2,25 @@
 {% block title %}Profile{% endblock %}
 
 {% block content%}
-<div class="container">
-  <div class="row well col-md-4 col-md-offset-4">
-
-
-    <h1>Profile for {{ user.username }}</h1>
-  </head>
-  <body>
-
-    <h1>{{ user.username }} - Profile</h1>
-
-    <h2>Email: {{ user.email }}</h2>
-
-  </div>
+<div class="row">
+<h1 class="well text-center">Profile for {{ user.username }}</h1>
+<table class="well col-md-offset-1">
+  <th class="col-md-2 text-center">Id</th>
+  <th class="col-md-2 text-center">Username</th>
+  <th class="col-md-2 text-center">Email</th>
+  <tr>
+    <td class="text-center">{{ user.id }}</td>
+    <td class="text-center">{{ user.username }}</td>
+    <td class="text-center">{{ user.email}}</td>
+    <td class="text-center">
+      <a href="/update" class="col-md-3 col-md-offset-6"><span class="glyphicon glyphicon-pencil"></span></a>
+    </td>
+    <td>
+      <form class="col-md-3 col-md-offset-1" action="/delete/{{ user.id }}?_method=DELETE" method="POST">
+          <input class="glyphicon glyphicon-trash" type="submit" name="delete" value="Delete">
+      </form>
+    </td>
+  </tr>
+</table>
 </div>
-
 {% endblock %}

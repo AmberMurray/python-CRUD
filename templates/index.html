@@ -3,19 +3,28 @@
 
 {% block content%}
 
-    <h2 class="text-center">Welcome to The Website</h2>
+    <h2 class="text-center">Add A User</h2>
     <form class="well" action="/post_user" method="post">
-      <label for="username">Username:</label>
+      <label class="col-sm-offset-1" for="username">Username:</label>
       <input id="username" type="text" name="username" value="">
-      <label for="email">Email:</label>
+      <label class="col-sm-offset-2" for="email">Email:</label>
       <input id="email" type="text" name="email" value="">
       <input type="submit" name="submit" value="Submit">
     </form>
 
-    {% for user in myUser %}
-      <li>{{ user.id }}. {{ user.username }} - {{ user.email }}</li>
-    {% endfor %}
-
-    {{ oneItem.username }}
-
+<div class="row">
+    <table class="well col-md-offset-1">
+      <h3 class="text-center">Registered Users</h3>
+      <th class="col-md-2 text-center">Id</th>
+      <th class="col-md-2 text-center">Username</th>
+      <th class="col-md-2 text-center">Email</th>
+      {% for user in myUser %}
+      <tr>
+        <td class="text-center">{{ user.id }}</td>
+        <td class="text-center"><a href="/profile/{{ user.id }}">{{ user.username }}</a></td>
+        <td class="text-center">{{ user.email}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 {% endblock %}
