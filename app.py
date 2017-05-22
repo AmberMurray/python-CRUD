@@ -18,6 +18,7 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
 
+    #initializes the User object
     def __init__(self, username, email):
         self.username = username
         self.email = email
@@ -51,12 +52,13 @@ def edit(id):
     user = User.query.filter_by(id=id).first()
     return render_template('update.html', user=user)
 
-@app.route('/update/<id>', methods=['POST'])
+@app.route('/update/<id>', methods=['PUT'])
 def update(id):
     formInfo = User(request.form['username'], request.form['email'])
     user = User.query.filter_by(id=id).first()
     user.username = formInfo.username
     user.email = formInfo.email
+    user.update().where(id=id).values(user.username, user.email)
     db.session.commit()
     return redirect(url_for('index.html'))
 
