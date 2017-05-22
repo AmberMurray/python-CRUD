@@ -46,10 +46,20 @@ def post_user():
     db.session.commit()
     return redirect(url_for('index'))
 
-@app.route('/update/<id>', methods=['GET'])
-def update(id):
+@app.route('/edit/<id>', methods=['GET'])
+def edit(id):
     user = User.query.filter_by(id=id).first()
     return render_template('update.html', user=user)
+
+@app.route('/update/<id>', methods=['POST'])
+def update(id):
+    formInfo = User(request.form['username'], request.form['email'])
+    user = User.query.filter_by(id=id).first()
+    user.username = formInfo.username
+    user.email = formInfo.email
+    db.session.commit()
+    return redirect(url_for('index.html'))
+
 
 @app.route('/delete/<id>', methods=['POST'])
 def delete(id):

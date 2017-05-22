@@ -13,7 +13,7 @@
     <td class="text-center">{{ user.username }}</td>
     <td class="text-center">{{ user.email}}</td>
     <td class="text-center">
-      <a href="/update/{{ user.id }}" class="col-md-3 col-md-offset-6"><span class="glyphicon glyphicon-pencil"></span></a>
+      <a href="/edit/{{ user.id }}" class="col-md-3 col-md-offset-6"><span class="glyphicon glyphicon-pencil"></span></a>
     </td>
     <td>
       <form class="col-md-3 col-md-offset-1" action="/delete/{{ user.id }}?_method=DELETE" method="POST">
