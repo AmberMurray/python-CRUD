@@ -58,7 +58,7 @@ def update(id):
     user = User.query.filter_by(id=id).first()
     user.username = formInfo.username
     user.email = formInfo.email
-    user.update().where(id=id).values(user.username, user.email)
+    db.session.add(user)
     db.session.commit()
     return redirect(url_for('index.html'))
 
